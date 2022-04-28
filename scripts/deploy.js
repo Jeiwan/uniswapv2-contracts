@@ -40,6 +40,7 @@ async function main() {
   await tokenA.approve(router.address, ether("1"));
   await tokenB.approve(router.address, ether("1"));
 
+  // Creates pair since it doesn't exist
   await router.addLiquidity(
     tokenA.address,
     tokenB.address,
