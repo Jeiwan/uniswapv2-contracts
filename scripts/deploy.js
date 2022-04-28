@@ -13,13 +13,9 @@ async function main() {
 
   //
   //
-  // Uniswap deployment
+  // Deploy Uniswap
   //
   //
-  // const Library = await ethers.getContractFactory("UniswapV2Library");
-  // const library = await Library.deploy();
-  // await library.deployed();
-
   const Factory = await ethers.getContractFactory("UniswapV2Factory");
   const factory = await Factory.deploy(owner.address);
   await factory.deployed();
@@ -28,17 +24,13 @@ async function main() {
   const router = await Router.deploy(factory.address, weth.address);
   await router.deployed();
 
+  //
+  //
+  // Deploy a pair and add liquidity
+  //
+  //
   const Pair = await ethers.getContractFactory("UniswapV2Pair");
 
-  console.log("WETH deployed to:", weth.address);
-  console.log("Factory deployed to:", factory.address);
-  console.log("Router deployed to:", router.address);
-
-  //
-  //
-  // Pair deployment
-  //
-  //
   const tokenA = await Token.deploy("Token A", "TKNA", ether("10"));
   await tokenA.deployed();
 
@@ -59,13 +51,14 @@ async function main() {
     9999999999 // don't expire
   );
 
-  console.log("WOOOOOOOOOOOOOOOT!");
-
   const pairAddress = await factory.getPair(tokenA.address, tokenB.address);
-  console.log(pairAddress)
   const pair = Pair.attach(pairAddress);
 
-  console.log("Router deployed to:", pair.address);
+  console.log("Deployed contracts:");
+  console.log(weth.address, "– WETH");
+  console.log(factory.address, "– Factory");
+  console.log(router.address, "– Router");
+  console.log(pair.address, "– Pair (Token A, Token B)");
 }
 
 // We recommend this pattern to be able to use async/await everywhere
