@@ -7,7 +7,7 @@ import './interfaces/V1/IUniswapV1Exchange.sol';
 import './interfaces/V1/IUniswapV1Factory.sol';
 import './libraries/TransferHelper.sol';
 
-contract UniswapV2Migrator is IUniswapV2Migrator {
+contract UniswapV2Migrator {
     IUniswapV1Factory immutable factoryV1;
     IUniswapV2Router01 immutable router;
 
@@ -22,7 +22,6 @@ contract UniswapV2Migrator is IUniswapV2Migrator {
 
     function migrate(address token, uint amountTokenMin, uint amountETHMin, address to, uint deadline)
         external
-        override
     {
         IUniswapV1Exchange exchangeV1 = IUniswapV1Exchange(factoryV1.getExchange(token));
         uint liquidityV1 = exchangeV1.balanceOf(msg.sender);
