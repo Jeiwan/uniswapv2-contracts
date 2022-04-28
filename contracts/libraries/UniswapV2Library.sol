@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 pragma solidity =0.8.13;
 
 import '../interfaces/IUniswapV2Pair.sol';
@@ -21,7 +22,7 @@ library UniswapV2Library {
                 hex'ff',
                 factory,
                 keccak256(abi.encodePacked(token0, token1)),
-                hex'a2e5f9517ea60e2173e4491f5e5319592bb4796855e4ff0b987e9c39af137c18' // init code hash
+                hex'c779f884b0d3b96c99d18260ba7f1b2c9a66dcddcacbcdf30f304d308cd4976e' // init code hash
             )))));
     }
 
